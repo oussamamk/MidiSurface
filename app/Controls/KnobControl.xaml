@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="MidiSurface.Controls.KnobControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MidiSurface.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="60">
+    <Grid>
+        <!-- Knob body -->
+        <Ellipse Stroke="DimGray" StrokeThickness="2" Fill="Black" 
+                 Width="60" Height="60" VerticalAlignment="Top"/>
+
+        <!-- Pointer -->
+        <Line x:Name="Pointer" Stroke="Red" StrokeThickness="3"
+              X1="30" Y1="30" X2="30" Y2="10" 
+              StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+              VerticalAlignment="Top" Height="60">
+            <Line.RenderTransform>
+                <RotateTransform x:Name="Rotation" CenterX="30" CenterY="30" Angle="0"/>
+            </Line.RenderTransform>
+        </Line>
+
+        <!-- Label -->
+        <TextBlock Text="{Binding Label, RelativeSource={RelativeSource AncestorType=local:KnobControl}}"
+                   TextAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,5,0,0"/>
+    </Grid>
+</UserControl>

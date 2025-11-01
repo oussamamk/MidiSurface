@@ -1,9 +1,9 @@
 ﻿<Application x:Class="MidiSurface.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MidiSurface"
+             xmlns:conv="clr-namespace:MidiSurface.Converters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <conv:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
     </Application.Resources>
 </Application>
