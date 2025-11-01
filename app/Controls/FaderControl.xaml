@@ -4,18 +4,18 @@
              xmlns:local="clr-namespace:MidiSurface.Controls"
              x:Name="Root">
     <Grid>
-        <!-- Main content: Slider + Label -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <!-- Slider takes all available space -->
+            <!-- Slider fills available space -->
             <RowDefinition Height="Auto"/>
-            <!-- Label takes only what it needs -->
+            <!-- Label takes minimal space -->
         </Grid.RowDefinitions>
 
         <!-- Fader (Slider) -->
         <Slider x:Name="MyVerticalSlider"
                 Grid.Row="0"
-                Width="40"
+                MinWidth="40"
+                MinHeight="260"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Orientation="Vertical"
@@ -26,17 +26,21 @@
                 <ControlTemplate TargetType="Slider">
                     <Grid>
                         <Rectangle Fill="DimGray" Width="5" RadiusX="2.5" RadiusY="2.5"
-                                   HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Stretch"/>
                         <Track x:Name="PART_Track" VerticalAlignment="Stretch">
                             <Track.Thumb>
-                                <Thumb Width="40" Height="20" Background="Black"
+                                <Thumb MinWidth="40" MinHeight="20" 
+                                       Background="Black"
                                        BorderBrush="Gray" BorderThickness="1"/>
                             </Track.Thumb>
                             <Track.DecreaseRepeatButton>
-                                <RepeatButton Command="Slider.DecreaseLarge" Opacity="0" IsHitTestVisible="False"/>
+                                <RepeatButton Command="Slider.DecreaseLarge" 
+                                              Opacity="0" IsHitTestVisible="False"/>
                             </Track.DecreaseRepeatButton>
                             <Track.IncreaseRepeatButton>
-                                <RepeatButton Command="Slider.IncreaseLarge" Opacity="0" IsHitTestVisible="False"/>
+                                <RepeatButton Command="Slider.IncreaseLarge" 
+                                              Opacity="0" IsHitTestVisible="False"/>
                             </Track.IncreaseRepeatButton>
                         </Track>
                     </Grid>
@@ -48,7 +52,7 @@
         <TextBlock Grid.Row="1"
                    Text="{Binding Label, ElementName=Root}"
                    TextAlignment="Center"
-                   FontWeight="Bold"
+                   FontSize="10"
                    Margin="0,4,0,0"/>
     </Grid>
 </UserControl>

@@ -5,5 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <conv:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
+        <conv:HalfConverter x:Key="HalfConverter"/>
+        <conv:KnobPointerConverter x:Key="KnobPointerConverter"/>
     </Application.Resources>
 </Application>

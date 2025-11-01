@@ -41,10 +41,10 @@ namespace MidiSurface.ViewModels
         // Constructor: creates 4 buttons with labels M, S, A, R
         public ChannelStripViewModel()
         {
-            Buttons.Add(new ButtonViewModel { Label = "M" });
-            Buttons.Add(new ButtonViewModel { Label = "S" });
-            Buttons.Add(new ButtonViewModel { Label = "A" });
-            Buttons.Add(new ButtonViewModel { Label = "R" });
+            Buttons.Add(new ButtonViewModel { Label = "Mute", BtnContent = "M" });
+            Buttons.Add(new ButtonViewModel { Label = "Solo", BtnContent = "S" });
+            Buttons.Add(new ButtonViewModel { Label = "Record", BtnContent = "R" });
+            Buttons.Add(new ButtonViewModel { Label = "Select", BtnContent = "⭘" });
         }
 
         // Needed for UI updates

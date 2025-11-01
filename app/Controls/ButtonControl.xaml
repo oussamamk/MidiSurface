@@ -1,10 +1,24 @@
 ﻿<UserControl x:Class="MidiSurface.Controls.ButtonControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MidiSurface.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="50">
-    <Button Content="{Binding Label}" Width="35" Height="35"  Background="{Binding IsPressed}"/>
+             x:Name="Root"
+             MinWidth="40" MinHeight="50">
+
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+        <!-- Button LED (clickable area) -->
+        <Button x:Name="ButtonSurface"
+                Width="35" Height="35"
+                Background="{Binding IsLit, ElementName=Root, Converter={StaticResource BoolToBrushConverter}}"
+                Foreground="White"
+                Content="{Binding BtnContent}"
+                Click="OnButtonClick"
+                BorderBrush="Gray" BorderThickness="1"/>
+
+            <!-- Label below -->
+            <TextBlock Text="{Binding Label, ElementName=Root}"
+                   TextAlignment="Center"
+                   FontSize="10"
+                   Margin="0,4,0,0"/>
+    </StackPanel>
 </UserControl>

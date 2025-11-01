@@ -7,6 +7,7 @@ namespace MidiSurface.ViewModels
     {
         // This is the text shown on the button (e.g., "M", "S")
         public string Label { get; set; } = "Btn";
+        public string BtnContent { get; set; } = "Btn";
 
         // This controls whether the button is "lit" (red) or not (gray)
         private bool _isLit;

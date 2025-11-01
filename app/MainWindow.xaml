@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:MidiSurface.Controls"
         xmlns:vm="clr-namespace:MidiSurface.ViewModels"
-        Title="MIDI Surface" Height="500" Width="1200">
+        Title="MIDI Surface" Height="600" Width="1000">
+        <Viewbox Stretch="Uniform">
     <ItemsControl ItemsSource="{Binding Strips}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
@@ -16,4 +17,6 @@
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
-</Window>
+        </Viewbox>
+
+    </Window>
