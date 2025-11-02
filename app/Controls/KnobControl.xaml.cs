@@ -93,9 +93,10 @@ namespace MidiSurface.Controls
             {
                 var pos = e.GetPosition(this);
                 double delta = _lastPos.Y - pos.Y; // vertical drag = value change
+                //double delta = pos.X - _lastPos.X; // Horizontal drag = value change
                 _lastPos = pos;
 
-                double newValue = Value + delta * 2; // sensitivity multiplier
+                double newValue = Value + delta; // sensitivity multiplier
                 Value = Math.Clamp(newValue, Minimum, Maximum);
 
                 // Optional: Raise event for MIDI send (if needed)
