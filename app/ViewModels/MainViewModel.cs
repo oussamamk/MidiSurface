@@ -1,6 +1,5 @@
-﻿// MainViewModel.cs
+﻿using MidiSurface.ViewModels;
 using System.Collections.ObjectModel;
-using MidiSurface.ViewModels;
 
 public class MainViewModel
 {
@@ -11,9 +10,10 @@ public class MainViewModel
         // Create 8 channel strips
         for (int i = 0; i < 8; i++)
         {
-            Strips.Add(new ChannelStripViewModel
+            Strips.Add(new ChannelStripViewModel(0, i)
             {
                 ChannelName = $"CH {i + 1}"
+
             });
         }
     }

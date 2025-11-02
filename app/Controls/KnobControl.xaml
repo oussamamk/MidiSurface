@@ -8,18 +8,15 @@
              d:DesignHeight="80" d:DesignWidth="60">
 
     <Grid>
-        <!-- Shared container that defines the knob size -->
         <Grid x:Name="KnobContainer" 
               Width="{Binding ActualWidth, ElementName=KnobBody}"
               Height="{Binding ActualHeight, ElementName=KnobBody}"
               VerticalAlignment="Top">
 
-            <!-- Knob body -->
             <Ellipse x:Name="KnobBody"
                      Stroke="DimGray" StrokeThickness="2" Fill="Black" 
                      MinWidth="60" MinHeight="60" />
 
-            <!-- Pointer: dynamically sized -->
             <Line x:Name="Pointer" 
                   Stroke="Red" StrokeThickness="3"
                   StrokeStartLineCap="Round" 
@@ -56,7 +53,6 @@
             </Line>
         </Grid>
 
-        <!-- Label below the knob -->
         <TextBlock Text="{Binding Label, RelativeSource={RelativeSource AncestorType=local:KnobControl}}"
                    TextAlignment="Center"
                    VerticalAlignment="Bottom"

@@ -1,6 +1,5 @@
-﻿using System.Windows;
-using Melanchall.DryWetMidi.Multimedia;
-using Melanchall.DryWetMidi.Core;
+﻿using Melanchall.DryWetMidi.Multimedia;
+using System.Windows;
 
 namespace MidiSurface
 {
@@ -40,21 +39,8 @@ namespace MidiSurface
 
                 Console.WriteLine($"MIDI: {m}, {e}");
             }
-
         }
 
-
-        private void LoadChannelStrips()
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                //var strip = new MidiSurface.Controls.ChannelStrip();
-                //        strip.ChannelName = "CH" + (i + 1).ToString();
-                //MainPanel.Children.Add(strip);
-            }
-        }
-
-        // 👇 Clean up when window closes
         protected override void OnClosed(EventArgs e)
         {
             _midiIn?.StopEventsListening();

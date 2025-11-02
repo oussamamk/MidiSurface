@@ -3,37 +3,15 @@ using System.Runtime.CompilerServices;
 
 namespace MidiSurface.ViewModels
 {
-    public class ButtonViewModel : INotifyPropertyChanged
+    public class FaderViewModel : INotifyPropertyChanged
     {
-        private string _label = "Btn";
+        private string _label = "Volume";
         public string Label
         {
             get => _label;
             set
             {
                 _label = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _btnContent = "Btnc";
-        public string BtnContent
-        {
-            get => _btnContent;
-            set
-            {
-                _btnContent = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _isLit;
-        public bool IsLit
-        {
-            get => _isLit;
-            set
-            {
-                _isLit = value;
                 OnPropertyChanged();
             }
         }
@@ -52,15 +30,29 @@ namespace MidiSurface.ViewModels
             }
         }
 
-        private int _note = 0;
-        public int Note
+        private int _ccNumber = 1;
+        public int CCNumber
         {
-            get => _note;
+            get => _ccNumber;
             set
             {
                 if (value is >= 0 and <= 127)
                 {
-                    _note = value;
+                    _ccNumber = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int _value = 20;
+        public int Value
+        {
+            get => _value;
+            set
+            {
+                if (value is >= 0 and <= 127)
+                {
+                    _value = value;
                     OnPropertyChanged();
                 }
             }

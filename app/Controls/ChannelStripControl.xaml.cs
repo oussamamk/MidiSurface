@@ -13,7 +13,7 @@ namespace MidiSurface.Controls
 #if DEBUG
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                DataContext = new ChannelStripViewModel();
+                DataContext = new ChannelStripViewModel(0, 0);
             }
 #endif
         }

@@ -8,23 +8,35 @@ namespace MidiSurface.Controls
 {
     public partial class KnobControl : UserControl
     {
-        // === Value (bindable, double for smoothness) ===
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register(
-                nameof(Value),
-                typeof(double),
-                typeof(KnobControl),
-                new PropertyMetadata(0.0, OnValueChanged));
+            DependencyProperty.Register(nameof(Value), typeof(double), typeof(KnobControl), new PropertyMetadata(0.0, OnValueChanged));
 
-        // === Range ===
+        public static readonly DependencyProperty MinimumProperty =
+            DependencyProperty.Register(nameof(Minimum), typeof(double), typeof(KnobControl), new PropertyMetadata(0.0));
+
+        public static readonly DependencyProperty MaximumProperty =
+            DependencyProperty.Register(nameof(Maximum), typeof(double), typeof(KnobControl), new PropertyMetadata(127.0));
+
+        public static readonly DependencyProperty LabelProperty =
+            DependencyProperty.Register(nameof(Label), typeof(string), typeof(KnobControl), new PropertyMetadata("Knob"));
+
+        public static readonly DependencyProperty ChannelProperty =
+            DependencyProperty.Register(nameof(Channel), typeof(int), typeof(KnobControl), new PropertyMetadata(1));
+
+        public static readonly DependencyProperty CCNumberProperty =
+            DependencyProperty.Register(nameof(CCNumber), typeof(int), typeof(KnobControl), new PropertyMetadata(11));
+
+        public double Value
+        {
+            get => (double)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
+        }
+
         public double Minimum
         {
             get => (double)GetValue(MinimumProperty);
             set => SetValue(MinimumProperty, value);
         }
-
-        public static readonly DependencyProperty MinimumProperty =
-            DependencyProperty.Register(nameof(Minimum), typeof(double), typeof(KnobControl), new PropertyMetadata(0.0));
 
         public double Maximum
         {
@@ -32,16 +44,6 @@ namespace MidiSurface.Controls
             set => SetValue(MaximumProperty, value);
         }
 
-        public static readonly DependencyProperty MaximumProperty =
-            DependencyProperty.Register(nameof(Maximum), typeof(double), typeof(KnobControl), new PropertyMetadata(127.0));
-
-        // === Label ===
-        public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register(
-                nameof(Label),
-                typeof(string),
-                typeof(KnobControl),
-                new PropertyMetadata("Knob"));
 
         public string Label
         {
@@ -49,11 +51,16 @@ namespace MidiSurface.Controls
             set => SetValue(LabelProperty, value);
         }
 
-        // === Value Property Wrapper ===
-        public double Value
+        public int Channel
         {
-            get => (double)GetValue(ValueProperty);
-            set => SetValue(ValueProperty, value);
+            get => (int)GetValue(ChannelProperty);
+            set => SetValue(ChannelProperty, value);
+        }
+
+        public int CCNumber
+        {
+            get => (int)GetValue(CCNumberProperty);
+            set => SetValue(CCNumberProperty, value);
         }
 
         private Point _lastPos;
@@ -61,6 +68,7 @@ namespace MidiSurface.Controls
         public KnobControl()
         {
             InitializeComponent();
+
             MouseDown += (s, e) =>
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
@@ -69,11 +77,13 @@ namespace MidiSurface.Controls
                     CaptureMouse();
                 }
             };
+
             MouseUp += (s, e) =>
             {
                 if (IsMouseCaptured)
                     ReleaseMouseCapture();
             };
+
             MouseMove += Knob_MouseMove;
         }
 
@@ -113,7 +123,7 @@ namespace MidiSurface.Controls
                 //    EasingFunction = new SineEase { EasingMode = EasingMode.EaseOut }
                 //};
                 //knob.Rotation.BeginAnimation(RotateTransform.AngleProperty, anim);
-                
+
             }
         }
     }

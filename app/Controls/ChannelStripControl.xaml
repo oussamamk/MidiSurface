@@ -6,25 +6,17 @@
 
     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="3" Padding="5">
         <Grid>
-            <!-- Define 2 columns -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <!-- Main controls -->
                 <ColumnDefinition Width="Auto"/>
-                <!-- Buttons (just wide enough) -->
             </Grid.ColumnDefinitions>
 
-            <!-- Define 3 rows -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <!-- Channel Name -->
                 <RowDefinition Height="Auto"/>
-                <!-- Knob + Label -->
                 <RowDefinition Height="*"/>
-                <!-- Fader + Label (takes remaining space) -->
             </Grid.RowDefinitions>
 
-            <!-- === CHANNEL NAME (Row 0, Col 0) === -->
             <TextBlock Grid.Row="0" Grid.Column="0"
                        Text="{Binding ChannelName}"
                        FontWeight="Bold"
@@ -32,33 +24,33 @@
                        Margin="0,0,0,10"
                        HorizontalAlignment="Center"/>
 
-            <!-- === KNOB (Row 1, Col 0) === -->
             <StackPanel Grid.Row="1" Grid.Column="0"
                         HorizontalAlignment="Center">
                 <c:KnobControl
                     MinHeight="80" MinWidth="60"
                     Width="Auto" Height="Auto"
-                    Minimum="{Binding KnobMinimum}"
-                    Maximum="{Binding KnobMaximum}"
-                    Value="{Binding KnobValue, Mode=TwoWay}"
-                    Label="{Binding KnobLabel}"
+                    Minimum="{Binding Knob.Minimum}"
+                    Maximum="{Binding Knob.Maximum}"
+                    Value="{Binding Knob.Value, Mode=TwoWay}"
+                    Label="{Binding Knob.Label}"
+                    Channel="{Binding Knob.Channel}"
+                    CCNumber="{Binding Knob.CCNumber}"
                     Margin="0,0,0,15"/>
             </StackPanel>
 
-            <!-- === FADER (Row 2, Col 0) === -->
             <StackPanel Grid.Row="2" Grid.Column="0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Stretch">
                 <c:FaderControl
                     Width="Auto" Height="Auto"
-                    Minimum="{Binding FaderMinimum}"
-                    Maximum="{Binding FaderMaximum}"
-                    Value="{Binding FaderValue, Mode=TwoWay}"
-                    Label="{Binding FaderLabel}"
+                    Minimum="{Binding Fader.Minimum}"
+                    Maximum="{Binding Fader.Maximum}"
+                    Value="{Binding Fader.Value, Mode=TwoWay}"
+                    Label="{Binding Fader.Label}"
+                    Channel="{Binding Fader.Channel}"
                     Margin="0,0,0,20"/>
             </StackPanel>
 
-            <!-- === BUTTONS (Row 2, Col 1) === -->
             <ItemsControl Grid.Row="2" Grid.Column="1"
               ItemsSource="{Binding Buttons}"
               VerticalAlignment="Top"
@@ -72,9 +64,12 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <c:ButtonControl 
-                Label="{Binding Label}"
-                IsLit="{Binding IsLit}"
-                Margin="0,0,0,20"/>
+                            Label="{Binding Label}"
+                            BtnContent="{Binding BtnContent}"
+                            IsLit="{Binding IsLit}"
+                            Channel="{Binding Channel}"
+                            Note="{Binding Note}"
+                            Margin="0,0,0,20"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

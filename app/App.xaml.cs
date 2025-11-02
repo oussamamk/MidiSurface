@@ -8,5 +8,4 @@ namespace MidiSurface
     public partial class App : Application
     {
     }
-
 }

@@ -6,16 +6,13 @@
              MinWidth="40" MinHeight="50">
 
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-        <!-- Button LED (clickable area) -->
         <Button x:Name="ButtonSurface"
                 Width="35" Height="35"
                 Background="{Binding IsLit, ElementName=Root, Converter={StaticResource BoolToBrushConverter}}"
-                Foreground="White"
                 Content="{Binding BtnContent}"
                 Click="OnButtonClick"
                 BorderBrush="Gray" BorderThickness="1"/>
 
-            <!-- Label below -->
             <TextBlock Text="{Binding Label, ElementName=Root}"
                    TextAlignment="Center"
                    FontSize="10"

@@ -6,48 +6,55 @@ namespace MidiSurface.ViewModels
 {
     public class ChannelStripViewModel : INotifyPropertyChanged
     {
-        // Top label (e.g., "Vocals", "Drums", "CH 1")
         public string ChannelName { get; set; } = "CH 1";
 
-        // === KNOB ===
-        public string KnobLabel { get; set; } = "Pan";
-        private double _knobValue = 63;
-        public double KnobValue
+        private KnobViewModel _knob = new();
+        public KnobViewModel Knob
         {
-            get => _knobValue;
+            get => _knob;
             set
             {
-                _knobValue = Math.Clamp(value, 0, 127);
+                _knob = value;
                 OnPropertyChanged();
             }
         }
 
-        // === FADER ===
-        public string FaderLabel { get; set; } = "Volume";
-        private double _faderValue = 20;
-        public double FaderValue
+        private FaderViewModel _fader = new();
+        public FaderViewModel Fader
         {
-            get => _faderValue;
+            get => _fader;
             set
             {
-                _faderValue = Math.Clamp(value, 0, 127);
+                _fader = value;
                 OnPropertyChanged();
             }
         }
 
-        // === BUTTONS (4 of them) ===
         public ObservableCollection<ButtonViewModel> Buttons { get; } = new();
 
-        // Constructor: creates 4 buttons with labels M, S, A, R
-        public ChannelStripViewModel()
+        public ChannelStripViewModel(int channel, int idx)
         {
-            Buttons.Add(new ButtonViewModel { Label = "Mute", BtnContent = "M" });
-            Buttons.Add(new ButtonViewModel { Label = "Solo", BtnContent = "S" });
-            Buttons.Add(new ButtonViewModel { Label = "Record", BtnContent = "R" });
-            Buttons.Add(new ButtonViewModel { Label = "Select", BtnContent = "⭘" });
+            Buttons.Add(new ButtonViewModel { Label = "Mute", BtnContent = "M", Channel = channel, Note = 16 + idx });
+            Buttons.Add(new ButtonViewModel { Label = "Solo", BtnContent = "S", Channel = channel, Note = 8 + idx });
+            Buttons.Add(new ButtonViewModel { Label = "Record", BtnContent = "R", Channel = channel, Note = 0 + idx });
+            Buttons.Add(new ButtonViewModel { Label = "Select", BtnContent = "⭘", Channel = channel, Note = 24 + idx });
+
+            Knob = new KnobViewModel
+            {
+                Label = "Pan" + idx.ToString(),
+                Channel = channel,
+                CCNumber = 10 + idx,
+                Value = 64
+            };
+
+            Fader = new FaderViewModel
+            {
+                Label = "Volume",
+                Channel = channel,
+                Value = 20 + idx * 10
+            };
         }
 
-        // Needed for UI updates
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
