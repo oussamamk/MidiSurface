@@ -43,14 +43,14 @@ namespace MidiSurface.ViewModels
             {
                 Label = "Pan" + idx.ToString(),
                 Channel = channel,
-                CCNumber = 10 + idx,
+                CCNumber = 16 + idx,
                 Value = 64
             };
 
             Fader = new FaderViewModel
             {
                 Label = "Volume",
-                Channel = channel,
+                Channel = idx,
                 Value = 20 + idx * 10
             };
         }

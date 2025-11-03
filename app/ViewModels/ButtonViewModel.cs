@@ -38,13 +38,13 @@ namespace MidiSurface.ViewModels
             }
         }
 
-        private int _channel = 1;
+        private int _channel = 0;
         public int Channel
         {
             get => _channel;
             set
             {
-                if (value is >= 1 and <= 16)
+                if (value is >= 0 and <= 15)
                 {
                     _channel = value;
                     OnPropertyChanged();
@@ -71,6 +71,11 @@ namespace MidiSurface.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        internal void SetPressedState(bool isPressed)
+        {
+            IsLit = isPressed;
         }
     }
 }
