@@ -27,18 +27,7 @@ public class MainViewModel
         var button = Strips.SelectMany(s => s.Buttons)
              .FirstOrDefault(b => b.Channel == noteOnEvent?.Channel && b.Note == noteOnEvent?.NoteNumber);
         
-        button?.SetPressedState(true);
-    }
-
-    internal void ProcessNoteOff(NoteOffEvent? noteOffEvent)
-    {
-        if (noteOffEvent == null)
-            return;
-
-        var button = Strips.SelectMany(s => s.Buttons)
-            .FirstOrDefault(b => b.Channel == noteOffEvent?.Channel && b.Note == noteOffEvent?.NoteNumber);
-        
-        button?.SetPressedState(false);
+        button?.SetPressedState(noteOnEvent.Velocity);
     }
 
     internal void ProcessControlChange(ControlChangeEvent? controlChangeEvent)

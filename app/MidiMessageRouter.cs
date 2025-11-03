@@ -44,10 +44,6 @@ public class MidiMessageRouter : IDisposable
             {
                 HandelNoteOn(e.Event);
             }
-            else if (e.Event is NoteOffEvent)
-            {
-                HandelNoteOff(e.Event);
-            }
             else if  (e.Event is ControlChangeEvent)
             {
                 _mainViewModel.ProcessControlChange(e.Event as ControlChangeEvent);
@@ -58,11 +54,6 @@ public class MidiMessageRouter : IDisposable
             }
 
         }); 
-    }
-
-    private void HandelNoteOff(MidiEvent midiEvent)
-    {
-        _mainViewModel.ProcessNoteOff(midiEvent as NoteOffEvent);
     }
 
     private void HandelNoteOn(MidiEvent midiEvent)

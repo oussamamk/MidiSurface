@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Melanchall.DryWetMidi.Common;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace MidiSurface.ViewModels
@@ -76,6 +77,23 @@ namespace MidiSurface.ViewModels
         internal void SetPressedState(bool isPressed)
         {
             IsLit = isPressed;
+        }
+
+        internal void SetPressedState(SevenBitNumber velocity)
+        {
+            //if (velocity > 0)
+            //{
+            //    IsLit = true;
+            //}
+            //else
+            //{
+            //    IsLit = false;
+            //}
+
+            if (velocity == 0)
+            {
+                IsLit = !IsLit;
+            }
         }
     }
 }

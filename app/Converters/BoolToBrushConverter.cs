@@ -8,7 +8,8 @@ namespace MidiSurface.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is true ? Brushes.Red : Brushes.DimGray;
+            var red = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#C51012"));
+            return value is true ? red: Brushes.DimGray;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
