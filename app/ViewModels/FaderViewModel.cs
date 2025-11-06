@@ -69,5 +69,10 @@ namespace MidiSurface.ViewModels
         {
             Value = pitchValue;
         }
+
+        internal void SetLabel(string valueString)
+        {
+            Label = valueString;
+        }
     }
 }

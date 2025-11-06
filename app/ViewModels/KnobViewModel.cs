@@ -68,14 +68,21 @@ namespace MidiSurface.ViewModels
 
         internal void SetValue(SevenBitNumber controlValue)
         {
-            if (controlValue == 65)
-            {
-                Value--;
-            }
-            else if (controlValue == 1)
-            {
-                Value++;
-            }
+            //if (controlValue == 65)
+            //{
+            //    Value--;
+            //}
+            //else if (controlValue == 1)
+            //{
+            //    Value++;
+            //}
+
+            Value = controlValue;
+        }
+
+        internal void SetLabel(string valueString)
+        {
+            Label = valueString;
         }
     }
 }

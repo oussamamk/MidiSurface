@@ -81,19 +81,24 @@ namespace MidiSurface.ViewModels
 
         internal void SetPressedState(SevenBitNumber velocity)
         {
-            //if (velocity > 0)
-            //{
-            //    IsLit = true;
-            //}
-            //else
-            //{
-            //    IsLit = false;
-            //}
-
-            if (velocity == 0)
+            if (velocity > 0)
             {
-                IsLit = !IsLit;
+                IsLit = true;
             }
+            else
+            {
+                IsLit = false;
+            }
+
+            //if (velocity == 0)
+            //{
+            //    IsLit = !IsLit;
+            //}
+        }
+
+        internal void SetLabel(string valueString)
+        {
+            Label = valueString;
         }
     }
 }

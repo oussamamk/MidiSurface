@@ -1,6 +1,9 @@
 ﻿using Melanchall.DryWetMidi.Core;
 using MidiSurface.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 
 public class MainViewModel
 {
@@ -26,7 +29,7 @@ public class MainViewModel
 
         var button = Strips.SelectMany(s => s.Buttons)
              .FirstOrDefault(b => b.Channel == noteOnEvent?.Channel && b.Note == noteOnEvent?.NoteNumber);
-        
+
         button?.SetPressedState(noteOnEvent.Velocity);
     }
 
@@ -54,6 +57,111 @@ public class MainViewModel
             .FirstOrDefault(f =>
                 f.Channel == pitchBendEvent.Channel);
 
-        fader?.SetValue((ushort)(pitchBendEvent.PitchValue/128));
+        fader?.SetValue((ushort)(pitchBendEvent.PitchValue / 128));
+    }
+
+    public class SysexRecord
+    {
+        private byte[] data;
+        public byte Index { get; set; }
+
+        public SysexRecord(byte Index, byte[] data) 
+        { 
+            this.Index = Index;
+            this.data = data;
+        }
+        public string ValueString
+        {
+            get
+            {
+                if (data.Length == 0)
+                    return string.Empty;
+
+                return Encoding.ASCII.GetString(data);
+            }
+        }
+    }
+
+    public static List<SysexRecord> ParseCustomSysexBuffer(byte[] buffer)
+    {
+        var records = new List<SysexRecord>();
+        int pos = 2;
+
+        while (pos < buffer.Length)
+        {
+            // Check for end marker
+            if (buffer[pos] == 0xF7)
+            {
+                break; // End of data
+            }
+
+            // Must have at least index + length + 1 data byte
+            if (pos + 2 > buffer.Length)
+            {
+                throw new ArgumentException("Buffer truncated: missing index/length");
+            }
+
+            byte index = buffer[pos];
+            byte length = buffer[pos + 1];
+            pos += 2;
+
+            // Validate length
+            if (length == 0)
+            {
+                continue;
+            }
+
+            // Ensure enough data remains
+            if (pos + length > buffer.Length)
+            {
+                throw new ArgumentException($"Buffer truncated: expected {length} data bytes for index {index}");
+            }
+
+            // Read 'length' bytes
+            byte[] values = new byte[length];
+            Array.Copy(buffer, pos, values, 0, length);
+            pos += length + 1;
+
+            records.Add(new SysexRecord(index, values));
+        }
+
+        return records;
+    }
+
+
+    internal void ProcessSysEx(SysExEvent? sysExEvent)
+    {
+        if (sysExEvent == null)
+            return;
+        var d = sysExEvent.Data;
+        List<SysexRecord>  records = ParseCustomSysexBuffer(d);
+
+        foreach(var rec in records)
+        {
+            if (rec.Index < 8)
+            {
+                Strips[rec.Index].Knob.SetLabel(rec.ValueString);
+            }
+            else if (rec.Index >= 8 && rec.Index < 16)
+            {
+                Strips[rec.Index - 8].Fader.SetLabel(rec.ValueString);
+            }
+            else if (rec.Index >= 16 && rec.Index < 24)
+            {
+                Strips[rec.Index - 16].Buttons[0].SetLabel(rec.ValueString);
+            }
+            else if (rec.Index >= 24 && rec.Index < 32)
+            {
+                Strips[rec.Index - 24].Buttons[1].SetLabel(rec.ValueString);
+            }
+            else if (rec.Index >= 32 && rec.Index < 40)
+            {
+                Strips[rec.Index - 32].Buttons[2].SetLabel(rec.ValueString);
+            }
+            else if (rec.Index >= 40 && rec.Index < 48)
+            {
+                Strips[rec.Index - 40].Buttons[3].SetLabel(rec.ValueString);
+            }
+        }
     }
 }

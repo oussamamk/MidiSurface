@@ -52,6 +52,10 @@ public class MidiMessageRouter : IDisposable
             {
                 _mainViewModel.ProcessPitchBend(e.Event as PitchBendEvent);
             }
+            else if (e.Event is SysExEvent)
+            {
+                _mainViewModel.ProcessSysEx(e.Event as SysExEvent);
+            }
 
         }); 
     }

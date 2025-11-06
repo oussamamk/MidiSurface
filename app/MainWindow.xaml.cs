@@ -17,7 +17,7 @@ namespace MidiSurface
             DataContext = _vm;
 
             _router = new MidiMessageRouter(_vm);
-            _router.StartListening("SMC-Mixer");
+            _router.StartListening("test");
         }
 
     }
