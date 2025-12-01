@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MidiSurface.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="80" d:DesignWidth="60">
+             d:DesignHeight="40" d:DesignWidth="30">
 
     <Grid>
         <Grid x:Name="KnobContainer" 
@@ -15,7 +15,7 @@
 
             <Ellipse x:Name="KnobBody"
                      Stroke="DimGray" StrokeThickness="2" Fill="Black" 
-                     MinWidth="60" MinHeight="60" />
+                     MinWidth="30" MinHeight="30" />
 
             <Line x:Name="Pointer" 
                   Stroke="Red" StrokeThickness="3"
@@ -57,6 +57,6 @@
                    TextAlignment="Center"
                    VerticalAlignment="Bottom"
                    FontSize="10"
-                   Margin="0,5,0,0"/>
+                   Margin="0,10,0,0"/>
     </Grid>
 </UserControl>

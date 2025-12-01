@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MidiSurface.Controls"
              x:Name="Root"
-             MinWidth="40" MinHeight="50">
+             MinWidth="20" MinHeight="25">
 
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
         <Button x:Name="ButtonSurface"
-                Width="35" Height="35"
+                Width="15" Height="15"
                 Background="{Binding IsLit, ElementName=Root, Converter={StaticResource BoolToBrushConverter}}"
                 Content="{Binding BtnContent}"
                 Click="OnButtonClick"
@@ -16,6 +16,6 @@
             <TextBlock Text="{Binding Label, ElementName=Root}"
                    TextAlignment="Center"
                    FontSize="10"
-                   Margin="0,4,0,0"/>
+                   Margin="0,0,0,0"/>
     </StackPanel>
 </UserControl>

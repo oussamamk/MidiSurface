@@ -6,7 +6,7 @@ namespace MidiSurface.ViewModels
 {
     public class ChannelStripViewModel : INotifyPropertyChanged
     {
-        public string ChannelName { get; set; } = "CH 1";
+        public string ChannelName { get; set; } = "1";
 
         private KnobViewModel _knob = new();
         public KnobViewModel Knob
@@ -32,27 +32,50 @@ namespace MidiSurface.ViewModels
 
         public ObservableCollection<ButtonViewModel> Buttons { get; } = new();
 
-        public ChannelStripViewModel(int channel, int idx)
+        public ChannelStripViewModel(int channel, int idx, int devType)
         {
-            Buttons.Add(new ButtonViewModel { Label = "Mute", BtnContent = "M", Channel = channel, Note = 16 + idx });
-            Buttons.Add(new ButtonViewModel { Label = "Solo", BtnContent = "S", Channel = channel, Note = 8 + idx });
-            Buttons.Add(new ButtonViewModel { Label = "Record", BtnContent = "R", Channel = channel, Note = 0 + idx });
-            Buttons.Add(new ButtonViewModel { Label = "Select", BtnContent = "⭘", Channel = channel, Note = 24 + idx });
-
-            Knob = new KnobViewModel
+            if (devType == 1)
             {
-                Label = "Pan" + idx.ToString(),
-                Channel = channel,
-                CCNumber = 16 + idx,
-                Value = 64
-            };
+                Buttons.Add(new ButtonViewModel { Label = "Mute", BtnContent = "", Channel = channel, Note = 16 + idx });
+                Buttons.Add(new ButtonViewModel { Label = "Solo", BtnContent = "", Channel = channel, Note = 8 + idx });
+                Buttons.Add(new ButtonViewModel { Label = "Rec", BtnContent = "", Channel = channel, Note = 0 + idx });
+                Buttons.Add(new ButtonViewModel { Label = "Select", BtnContent = "", Channel = channel, Note = 24 + idx });
 
-            Fader = new FaderViewModel
+                Knob = new KnobViewModel
+                {
+                    Label = "Pan",
+                    Channel = channel,
+                    CCNumber = 16 + idx,
+                    Value = 64
+                };
+
+                Fader = new FaderViewModel
+                {
+                    Label = "Volume",
+                    Channel = idx,
+                    Value = 0
+                };
+            }
+            else
             {
-                Label = "Volume",
-                Channel = idx,
-                Value = 20 + idx * 10
-            };
+                Buttons.Add(new ButtonViewModel { Label = "BTN1", BtnContent = "", Channel = channel, Note = idx });
+                Buttons.Add(new ButtonViewModel { Label = "BTN2", BtnContent = "", Channel = channel, Note = 9 + idx });
+                Knob = new KnobViewModel
+                {
+                    Label = "Knob",
+                    Channel = channel,
+                    CCNumber = 10 + idx,
+                    Value = 64
+                };
+
+                Fader = new FaderViewModel
+                {
+                    Label = "Level",
+                    Channel = channel,
+                    CCNumber = 20 + idx,
+                    Value = 0
+                };
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -14,8 +14,8 @@
         <!-- Fader (Slider) -->
         <Slider x:Name="MyVerticalSlider"
                 Grid.Row="0"
-                MinWidth="40"
-                MinHeight="260"
+                MinWidth="30"
+                MinHeight="150"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Orientation="Vertical"
@@ -30,7 +30,7 @@
                                    VerticalAlignment="Stretch"/>
                         <Track x:Name="PART_Track" VerticalAlignment="Stretch">
                             <Track.Thumb>
-                                <Thumb MinWidth="40" MinHeight="20" 
+                                <Thumb MinWidth="30" MinHeight="20" 
                                        Background="Black"
                                        BorderBrush="Gray" BorderThickness="1"/>
                             </Track.Thumb>

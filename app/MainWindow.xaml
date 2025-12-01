@@ -5,17 +5,36 @@
         xmlns:vm="clr-namespace:MidiSurface.ViewModels"
         Title="MIDI Surface" Height="600" Width="1000">
         <Viewbox Stretch="Uniform">
-            <ItemsControl ItemsSource="{Binding Strips}">
+            
+            <ItemsControl ItemsSource="{Binding Devices}">
+                <!-- Vertical layout for devices -->
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
+                        <StackPanel Orientation="Vertical" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+
+                <!-- Template for each device -->
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type vm:ChannelStripViewModel}">
-                        <c:ChannelStripControl />
+                    <DataTemplate DataType="{x:Type vm:DeviceViewModel}">
+                        <!-- Optional: Show device name -->
+                        <!-- <TextBlock Text="{Binding Name}" Margin="5" /> -->
+
+                        <!-- Horizontal strips for this device -->
+                        <ItemsControl ItemsSource="{Binding Strips}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:ChannelStripViewModel}">
+                                    <c:ChannelStripControl />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Viewbox>
-</Window>
+    </Window>
