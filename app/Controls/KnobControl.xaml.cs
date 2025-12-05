@@ -1,12 +1,11 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 //using System.Windows.Media;
 //using System.Windows.Media.Animation;
 
 namespace MidiSurface.Controls
 {
-    public partial class KnobControl : UserControl
+    public partial class KnobControl : System.Windows.Controls.UserControl
     {
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(double), typeof(KnobControl), new PropertyMetadata(0.0, OnValueChanged));
@@ -63,7 +62,7 @@ namespace MidiSurface.Controls
             set => SetValue(CCNumberProperty, value);
         }
 
-        private Point _lastPos;
+        private System.Windows.Point _lastPos;
 
         public KnobControl()
         {
@@ -87,7 +86,7 @@ namespace MidiSurface.Controls
             MouseMove += Knob_MouseMove;
         }
 
-        private void Knob_MouseMove(object sender, MouseEventArgs e)
+        private void Knob_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (IsMouseCaptured)
             {

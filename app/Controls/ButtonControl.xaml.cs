@@ -1,9 +1,8 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
 namespace MidiSurface.Controls
 {
-    public partial class ButtonControl : UserControl
+    public partial class ButtonControl : System.Windows.Controls.UserControl
     {
         public static readonly DependencyProperty BtnContentProperty =
             DependencyProperty.Register(nameof(BtnContent), typeof(string), typeof(ButtonControl), new PropertyMetadata("Ctn"));

@@ -1,10 +1,9 @@
-﻿using System.ComponentModel;
-using System.Windows.Controls;
-using MidiSurface.ViewModels;
+﻿using MidiSurface.ViewModels;
+using System.ComponentModel;
 
 namespace MidiSurface.Controls
 {
-    public partial class ChannelStripControl : UserControl
+    public partial class ChannelStripControl : System.Windows.Controls.UserControl
     {
         public ChannelStripControl()
         {

@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using MidiSurface.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using MidiSurface.ViewModels;
 
 namespace MidiSurface.Controls
 {
-    public partial class DeviceStripRow : UserControl
+    public partial class DeviceStripRow : System.Windows.Controls.UserControl
     {
         public static readonly DependencyProperty StripsProperty =
             DependencyProperty.Register(
@@ -71,13 +68,13 @@ namespace MidiSurface.Controls
             // Add column for global buttons (if needed)
             if (hasGlobalButtons)
             {
-                StripGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                StripGrid.ColumnDefinitions.Add(new System.Windows.Controls.ColumnDefinition { Width = GridLength.Auto });
             }
 
             // Add star-sized columns for strips
             foreach (var _ in strips)
             {
-                StripGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                StripGrid.ColumnDefinitions.Add(new System.Windows.Controls.ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             }
 
             // Add global buttons
@@ -90,7 +87,7 @@ namespace MidiSurface.Controls
                     DataContext = new { Buttons = buttonsList },
                     Margin = new Thickness(5, 0, 5, 0)
                 };
-                Grid.SetColumn(globalControl, 0);
+                System.Windows.Controls.Grid.SetColumn(globalControl, 0);
                 StripGrid.Children.Add(globalControl);
             }
 
@@ -102,7 +99,7 @@ namespace MidiSurface.Controls
                 {
                     DataContext = strips[i]
                 };
-                Grid.SetColumn(stripControl, colIndex + i);
+                System.Windows.Controls.Grid.SetColumn(stripControl, colIndex + i);
                 StripGrid.Children.Add(stripControl);
             }
         }

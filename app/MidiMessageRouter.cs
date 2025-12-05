@@ -2,7 +2,6 @@
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Multimedia;
 using MidiSurface.ViewModels;
-using System.Windows.Threading;
 
 public class MidiMessageRouter : IDisposable
 {

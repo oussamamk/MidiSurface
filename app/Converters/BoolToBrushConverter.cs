@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace MidiSurface.Converters
 {
@@ -8,8 +7,8 @@ namespace MidiSurface.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var red = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#C51012"));
-            return value is true ? red: Brushes.DimGray;
+            var red = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#C51012"));
+            return value is true ? red: System.Windows.Media.Brushes.DimGray;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

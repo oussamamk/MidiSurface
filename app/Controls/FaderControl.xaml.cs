@@ -1,9 +1,8 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
 namespace MidiSurface.Controls
 {
-    public partial class FaderControl : UserControl
+    public partial class FaderControl : System.Windows.Controls.UserControl
     {
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(double), typeof(FaderControl),
