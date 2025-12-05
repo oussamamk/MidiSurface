@@ -89,11 +89,6 @@ namespace MidiSurface.ViewModels
             {
                 IsLit = false;
             }
-
-            //if (velocity == 0)
-            //{
-            //    IsLit = !IsLit;
-            //}
         }
 
         internal void SetLabel(string valueString)

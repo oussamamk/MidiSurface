@@ -4,37 +4,26 @@
         xmlns:c="clr-namespace:MidiSurface.Controls"
         xmlns:vm="clr-namespace:MidiSurface.ViewModels"
         Title="MIDI Surface" Height="600" Width="1000">
-        <Viewbox Stretch="Uniform">
-            
-            <ItemsControl ItemsSource="{Binding Devices}">
-                <!-- Vertical layout for devices -->
+    <Viewbox Stretch="Uniform">
+        <Border Padding="0">
+            <!-- Remove padding if you want max width -->
+            <ItemsControl ItemsSource="{Binding Devices}"
+                          HorizontalContentAlignment="Stretch"
+                          VerticalContentAlignment="Top">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical" />
+                        <StackPanel Orientation="Vertical" Margin="0"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                <!-- Template for each device -->
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type vm:DeviceViewModel}">
-                        <!-- Optional: Show device name -->
-                        <!-- <TextBlock Text="{Binding Name}" Margin="5" /> -->
-
-                        <!-- Horizontal strips for this device -->
-                        <ItemsControl ItemsSource="{Binding Strips}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="{x:Type vm:ChannelStripViewModel}">
-                                    <c:ChannelStripControl />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                        <c:DeviceStripRow
+                            Strips="{Binding Strips}" 
+                            GlobalButtons="{Binding CButtons}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </Viewbox>
-    </Window>
+        </Border>
+    </Viewbox>
+</Window>
